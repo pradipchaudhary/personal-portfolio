@@ -8,20 +8,20 @@
   .layout {
     display: flex;
     .left-col {
-      width: 45%;
+      width: 55%;
       @include medium-screen {
         padding-top: 55px;
       }
       @include large-screen {
         padding-top: 0;
-        width: 37%;
+        width: 40%;
       }
       .title {
         display: flex;
         flex-direction: column;
         color: $white;
         .small-text {
-          @include typography(42px, 400, 48px);
+          @include typography(30px, 400, 48px);
           display: flex;
           align-items: center;
           .icon {
@@ -29,22 +29,22 @@
           }
         }
         .big-text {
-          @include typography(62px, 400, 72px);
+          @include typography(50px, 500, 72px);
         }
       }
       p {
         color: $white;
         @include typography(18px, 400, 24px);
-        margin: 25px 0;
+        margin: 20px 0;
       }
     }
     .right-col {
-      width: 55%;
+      width: 45%;
       display: flex;
       align-items: flex-end;
       position: relative;
       @include large-screen {
-        width: 63%;
+        width: 60%;
       }
       img {
         width: 100%;

@@ -25,13 +25,13 @@ const IntroContent = () => {
         </div>
         <div className="right-col">
           <img src={girl} alt="Girlimage" />
-          <div className="hightlight horizontal">
+          <div className="highlights horizontal">
             <div className="icon">
               <BsAwardFill />
             </div>
             <div className="text">Best Design Award</div>
           </div>
-          <div className="hightlight horizontal">
+          <div className="highlights verticle">
             <div className="icon">
               <FaUser />
             </div>
