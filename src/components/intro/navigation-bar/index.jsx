@@ -13,7 +13,7 @@ const Navigation = () => {
         <span className="navigation-item">Skills</span>
         <span className="navigation-item">Portfolio</span>
         <span className="navigation-item">Blogs & Articles </span>
-        <CallToAction text="Contact me" />
+        <CallToAction text="Get Started" />
       </div>
     </div>
   );
