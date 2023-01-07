@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
+import Intro from "./components/intro";
 
 function App() {
   return (
     <div className="App">
-      <h1> Welcome to React app.</h1>
+      <Intro />
     </div>
   );
 }
