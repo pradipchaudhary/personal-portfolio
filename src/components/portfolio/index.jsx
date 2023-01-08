@@ -73,10 +73,22 @@ const projectsData = [
 const Portfolio = () => {
   const [projects, setProjects] = useState(projectsData);
   const [transition, setTransition] = useState(false);
+
+  //   Filter Portfolio
+  const filterProjects = (tag) => {
+    setTimeout(() => {
+      if (tag !== "all") {
+        const filterProjects = projectsData.filter((f) => f.tags.includes(tag));
+        setProjects(filterProjects);
+      } else {
+        setProjects(projectsData);
+      }
+    }, 200);
+  };
   return (
     <Section id="portfolio" title="Check my Portfolio" background="light">
       <div className="portfolio-content-wrapper">
-        <Filters />
+        <Filters filterProjects={(tag) => filterProjects(tag)} />
         <Showcase data={projects} transition={transition} />
       </div>
     </Section>
