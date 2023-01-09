@@ -7,6 +7,7 @@ const Showcase = ({ data, transition }) => {
     <div className="projects-showcase">
       {data.map((project) => (
         <div
+          key={project.name}
           className={`showcase-item ${
             transition === "zoomOut"
               ? "zoomOut"
