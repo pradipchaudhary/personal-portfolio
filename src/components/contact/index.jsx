@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.scss";
 import Section from "../shared/section";
+import ContactInfo from "./contact-info";
 
 const Contact = () => {
   return (
@@ -9,7 +10,9 @@ const Contact = () => {
       title="Any Question ? Feel Free To Contact"
       background="light"
     >
-      <div className="contact-content-wrapper"></div>
+      <div className="contact-content-wrapper">
+        <ContactInfo />
+      </div>
     </Section>
   );
 };
