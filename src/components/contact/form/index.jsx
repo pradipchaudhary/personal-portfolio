@@ -1,11 +1,10 @@
 import React from "react";
+
 import { send } from "emailjs-com";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import "react-toastify/dist/ReactToastify.min.css";
-
-// Import StyleSheet
 import "./style.scss";
 
 const Form = () => {
@@ -15,47 +14,117 @@ const Form = () => {
     formState: { errors },
   } = useForm();
 
-  // Submit the form
   const onSubmit = (data) => {
     send("service_bmd80zs", "template_4pmtpia", data, "lXY3mBanoJWwMGH1g")
       .then((response) => {
-        console.log("Success!", response.status, response.text);
+        console.log("SUCCESS!", response.status, response.text);
         formSuccess();
       })
       .catch((err) => {
-        console.log("Failed!", err.message);
+        console.log("FAILED...", err);
       });
   };
 
-  // success form
   const formSuccess = () => {
-    toast("Thanks for submitting your query!");
+    toast("Thanks for submitting your Query!");
     document.getElementById("queryForm").reset();
   };
+
   return (
     <div className="query-form">
       <ToastContainer />
-      <form id="queryForm" onSubmit={onSubmit}>
+      <form id="queryForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="input-field">
-          <input type="text" name="form_name" placeholder="Name" />
+          <input
+            type="text"
+            name="from_name"
+            placeholder="Name"
+            {...register("from_name", {
+              required: "Name is required",
+            })}
+          />
+          {errors.from_name?.message && (
+            <p className="errors">{errors.from_name?.message}</p>
+          )}
         </div>
-        <div className="imput-field">
-          <input type="text" name="reply_to" placeholder="Email" />
-        </div>
+
         <div className="input-field">
-          <input type="text" name="phone_number" placeholder="Phone" />
+          <input
+            type="text"
+            name="reply_to"
+            placeholder="Email"
+            {...register("reply_to", {
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            })}
+          />
+          {errors.reply_to?.message && (
+            <p className="errors">{errors.reply_to?.message}</p>
+          )}
         </div>
-        <div className="imput-field">
-          <input type="text" name="subject" placeholder="Subject" />
-        </div>
+
         <div className="input-field">
+          <input
+            type="text"
+            name="phone_number"
+            placeholder="Phone"
+            {...register("phone_number", {
+              required: "Phone number is required",
+              minLength: {
+                value: 8,
+                message: "Phone number is not valid",
+              },
+            })}
+          />
+          {errors.phone_number?.message && (
+            <p className="errors">{errors.phone_number?.message}</p>
+          )}
+        </div>
+
+        <div className="input-field">
+          <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            {...register("subject", {
+              required: "Subject is required",
+              minLength: {
+                value: 10,
+                message: "Minimum 10 characters required",
+              },
+            })}
+          />
+          {errors.subject?.message && (
+            <p className="errors">{errors.subject?.message}</p>
+          )}
+        </div>
+
+        <div className="input-field full-width">
           <textarea
             className="textarea"
             name="message"
-            placeholder="Message"
-          ></textarea>
+            placeholder="Your message"
+            {...register("message", {
+              required: "Message is required",
+              minLength: {
+                value: 20,
+                message: "Minimum 20 characters required",
+              },
+              maxLength: {
+                value: 500,
+                message: "Maximum 500 characters allowed",
+              },
+            })}
+          />
+          {errors.message?.message && (
+            <p className="errors">{errors.message?.message}</p>
+          )}
         </div>
-        <button type="submit"> Submit </button>
+
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
